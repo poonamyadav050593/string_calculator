@@ -34,6 +34,18 @@ describe StringCalculator do
     
     it "allows a custom delimiter to be used" do
       expect(calculator.add("//;\n1;2")).to eq(3)
+    end
+
+    it "throws an exception when a negative number is used" do
+      expect { calculator.add("1,-2") }.to raise_error("Negative numbers not allowed: -2")
+    end
+
+    it "throws an exception when multiple negative numbers are used" do
+      expect { calculator.add("1,-2,-3") }.to raise_error("Negative numbers not allowed: -2, -3")
+    end
+
+    it "handles a custom delimiter with multiple numbers and new lines" do
+      expect(calculator.add("//;\n1;2;3\n4")).to eq(10)
     end  
   end
 end
